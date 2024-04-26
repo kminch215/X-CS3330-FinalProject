@@ -8,10 +8,11 @@ public class FlightListController {
 	private FlightListView flightView;
 	private FlightListModel flightModel;
 	
-	public FlightListController(FlightListView flightView, FlightListModel flightModel) {
+	public FlightListController() {
 		super();
-		this.flightView = flightView;
-		this.flightModel = flightModel;
+		this.flightView = new FlightListView();
+		this.flightModel = new FlightListModel();
+		flightModel.initializeFlights();
 	}
 	
 	

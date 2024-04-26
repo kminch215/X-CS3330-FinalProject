@@ -8,10 +8,11 @@ public class SeatSelectionController {
 	private SeatSelectionView seatView;
 	private SeatListModel seatModel;
 	
-	public SeatSelectionController(SeatSelectionView seatView, SeatListModel seatModel) {
+	public SeatSelectionController() {
 		super();
-		this.seatView = seatView;
-		this.seatModel = seatModel;
+		this.seatView = new SeatSelectionView();
+		this.seatModel = new SeatListModel();
+		seatModel.initializeSeats();
 	}
 	
 }
