@@ -8,10 +8,10 @@ public class UserDashboardController {
 	private UserDashboardView dashboardView;
 	private UserDashboard dashboardModel;
 	
-	public UserDashboardController(UserDashboardView dashboardView, UserDashboard dashboardModel) {
+	public UserDashboardController() {
 		super();
-		this.dashboardView = dashboardView;
-		this.dashboardModel = dashboardModel;
+		this.dashboardView = new UserDashboardView();
+		this.dashboardModel = new UserDashboard(null); //change this to input the userID
 	}
 	
 	

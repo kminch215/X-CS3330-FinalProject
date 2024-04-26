@@ -9,7 +9,7 @@ public class UserLoginController {
 	private UserListModel loginModel;
 	
 	
-	public UserLoginController(UserLoginView loginView, UserListModel loginModel) {
+	public UserLoginController() {
 		super();
 		this.loginView = new UserLoginView();
 		this.loginModel = new UserListModel();
