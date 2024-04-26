@@ -1,9 +1,12 @@
 package edu.mu;
 
+import edu.mu.db.FlightApplicationSingleton;
+
 public class Main {
 
 	public static void main(String[] args) {
-		System.out.println("Test");
+		FlightApplicationSingleton.getInstance();
+		FlightApplicationSingleton.getInstance().initializeFlights();
 	}
 
 }
