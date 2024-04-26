@@ -1,5 +1,8 @@
 package edu.mu.view;
 
-public class FlightListView {
+import javax.swing.JFrame;
 
+public class FlightListView extends JFrame {
+
+	
 }
