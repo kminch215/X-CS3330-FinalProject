@@ -11,8 +11,8 @@ public class UserLoginController {
 	
 	public UserLoginController(UserLoginView loginView, UserListModel loginModel) {
 		super();
-		this.loginView = loginView;
-		this.loginModel = loginModel;
+		this.loginView = new UserLoginView();
+		this.loginModel = new UserListModel();
 	}
 
 	 

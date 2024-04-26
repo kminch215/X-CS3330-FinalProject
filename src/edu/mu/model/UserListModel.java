@@ -6,9 +6,9 @@ public class UserListModel {
 
 	private ArrayList<UserInformation> userList;
 
-	public UserListModel(ArrayList<UserInformation> userList) {
+	public UserListModel() {
 		super();
-		this.userList = userList;
+		this.userList = new ArrayList<UserInformation>();
 	}
 
 	public ArrayList<UserInformation> getUserList() {

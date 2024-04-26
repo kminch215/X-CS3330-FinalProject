@@ -10,8 +10,8 @@ public class UserRegisterController {
 	
 	public UserRegisterController(UserRegisterView registerView, UserListModel registerModel) {
 		super();
-		this.registerView = registerView;
-		this.registerModel = registerModel;
+		this.registerView = new UserRegisterView();
+		this.registerModel = new UserListModel();
 	}
 	
 }
