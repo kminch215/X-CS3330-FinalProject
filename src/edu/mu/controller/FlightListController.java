@@ -1,14 +1,14 @@
 package edu.mu.controller;
 
-import edu.mu.model.FlightInformation;
+import edu.mu.model.FlightListModel;
 import edu.mu.view.FlightListView;
 
 public class FlightListController {
 
 	private FlightListView flightView;
-	private FlightInformation flightModel;
+	private FlightListModel flightModel;
 	
-	public FlightListController(FlightListView flightView, FlightInformation flightModel) {
+	public FlightListController(FlightListView flightView, FlightListModel flightModel) {
 		super();
 		this.flightView = flightView;
 		this.flightModel = flightModel;

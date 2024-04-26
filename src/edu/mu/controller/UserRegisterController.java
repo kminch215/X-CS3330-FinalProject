@@ -1,14 +1,14 @@
 package edu.mu.controller;
 
-import edu.mu.model.UserInformation;
+import edu.mu.model.UserListModel;
 import edu.mu.view.UserRegisterView;
 
 public class UserRegisterController {
 
 	private UserRegisterView registerView;
-	private UserInformation registerModel;
+	private UserListModel registerModel;
 	
-	public UserRegisterController(UserRegisterView registerView, UserInformation registerModel) {
+	public UserRegisterController(UserRegisterView registerView, UserListModel registerModel) {
 		super();
 		this.registerView = registerView;
 		this.registerModel = registerModel;

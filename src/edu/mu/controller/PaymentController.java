@@ -1,14 +1,14 @@
 package edu.mu.controller;
 
-import edu.mu.model.PaymentInformation;
+import edu.mu.model.PaymentListModel;
 import edu.mu.view.PaymentView;
 
 public class PaymentController {
 
 	private PaymentView paymentView;
-	private PaymentInformation paymentModel;
+	private PaymentListModel paymentModel;
 	
-	public PaymentController(PaymentView paymentView, PaymentInformation paymentModel) {
+	public PaymentController(PaymentView paymentView, PaymentListModel paymentModel) {
 		super();
 		this.paymentView = paymentView;
 		this.paymentModel = paymentModel;
