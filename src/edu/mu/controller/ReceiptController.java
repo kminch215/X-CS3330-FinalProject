@@ -8,10 +8,10 @@ public class ReceiptController {
 	private ReceiptView receiptView;
 	private ReceiptListModel receiptModel;
 	
-	public ReceiptController(ReceiptView receiptView, ReceiptListModel receiptModel) {
+	public ReceiptController() {
 		super();
-		this.receiptView = receiptView;
-		this.receiptModel = receiptModel;
+		this.receiptView = new ReceiptView();
+		this.receiptModel = new ReceiptListModel();
 	}
 	
 }

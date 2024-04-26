@@ -6,9 +6,9 @@ public class ReceiptListModel {
 
 	private ArrayList<ReceiptInformation> receiptList;
 
-	public ReceiptListModel(ArrayList<ReceiptInformation> receiptList) {
+	public ReceiptListModel() {
 		super();
-		this.receiptList = receiptList;
+		this.receiptList = new ArrayList<ReceiptInformation>();
 	}
 
 	public ArrayList<ReceiptInformation> getReceiptList() {
