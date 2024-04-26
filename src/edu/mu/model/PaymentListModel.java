@@ -6,9 +6,9 @@ public class PaymentListModel {
 
 	private ArrayList<PaymentInformation> paymentModel;
 
-	public PaymentListModel(ArrayList<PaymentInformation> paymentModel) {
+	public PaymentListModel() {
 		super();
-		this.paymentModel = paymentModel;
+		this.paymentModel = new ArrayList<PaymentInformation>();
 	}
 
 	public ArrayList<PaymentInformation> getPaymentModel() {

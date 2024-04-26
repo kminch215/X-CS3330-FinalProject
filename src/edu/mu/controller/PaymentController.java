@@ -8,10 +8,10 @@ public class PaymentController {
 	private PaymentView paymentView;
 	private PaymentListModel paymentModel;
 	
-	public PaymentController(PaymentView paymentView, PaymentListModel paymentModel) {
+	public PaymentController() {
 		super();
-		this.paymentView = paymentView;
-		this.paymentModel = paymentModel;
+		this.paymentView = new PaymentView();
+		this.paymentModel = new PaymentListModel();
 	}
 	
 }
