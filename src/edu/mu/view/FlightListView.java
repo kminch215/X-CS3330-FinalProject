@@ -15,18 +15,30 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
 import edu.mu.model.FlightInformation;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.SwingConstants;
+import javax.swing.JComboBox;
 
 public class FlightListView extends JFrame {
 
 	private JPanel contentPanel;
 	private JTable flightTable;
-    private JButton sortButton;
+    private JButton selectFlight;
     private DefaultTableModel model;
+    private JLabel flightSelectorLabel;
+    private JLabel filterFlights;
+    private JLabel departureLabel;
+    private JComboBox<String> departureDropDown;
+    private JLabel arrivalLabel;
+    private JComboBox<String> arrivalDropDown;
+    private JButton filterButton;
 
 	
 	public FlightListView() {
@@ -38,6 +50,36 @@ public class FlightListView extends JFrame {
 		setContentPane(contentPanel);
 		getContentPane().setLayout(null);
 		
+		//Create header for the view
+		flightSelectorLabel = new JLabel("Flight Selector");
+		flightSelectorLabel.setLocation(0, 0);
+		flightSelectorLabel.setSize(484, 20);
+        flightSelectorLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        flightSelectorLabel.setFont(new Font("Sitka Heading", Font.BOLD, 16));
+        
+        //Create the filter componenets
+        filterFlights = new JLabel("Filter by: ");
+        filterFlights.setFont(new Font("Sitka Heading", Font.BOLD, 12));
+        filterFlights.setBounds(20, 31, 60, 20);
+        flightSelectorLabel.setFont(new Font("Sitka Heading", Font.BOLD, 10));
+        
+        departureLabel = new JLabel("Departure");
+        departureLabel.setFont(new Font("Sitka Small", Font.BOLD, 7));
+        departureLabel.setBounds(90, 31, 48, 18);
+        
+        departureDropDown = new JComboBox<>();
+        departureDropDown.setBounds(134, 29, 73, 20);
+        
+        arrivalLabel = new JLabel("Arrival");
+        arrivalLabel.setFont(new Font("Sitka Small", Font.BOLD, 7));
+        arrivalLabel.setBounds(217, 31, 35, 18);
+        
+        arrivalDropDown = new JComboBox<>();
+        arrivalDropDown.setBounds(245, 29, 73, 20);
+        
+        filterButton = new JButton("Filter");
+        filterButton.setBounds(368, 31, 73, 20);
+		
 		// Create table model for flights
 		model = new DefaultTableModel();
         flightTable = new JTable(model);
@@ -46,57 +88,70 @@ public class FlightListView extends JFrame {
         model.addColumn("Flight Number");
         model.addColumn("Departure");
         model.addColumn("Arrival");
-        model.addColumn("Select Flight");
+        
+        //setting the formatting of the table
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        flightTable.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
      
-        sortButton = new JButton("Sort Flights");
+        selectFlight = new JButton("Select Flights");
+        selectFlight.setLocation(0, 331);
+        selectFlight.setSize(500, 30);
         
         // Add components to the frame
-        getContentPane().setLayout(new BorderLayout());
-        getContentPane().add(new JScrollPane(flightTable), BorderLayout.CENTER);
-        getContentPane().add(sortButton, BorderLayout.SOUTH);
+        JScrollPane scrollPane = new JScrollPane(flightTable);
+        scrollPane.setSize(440, 250);
+        scrollPane.setLocation(20, 60);
+        contentPanel.add(flightSelectorLabel);
+        contentPanel.add(filterFlights);
+        contentPanel.add(departureLabel);
+        contentPanel.add(departureDropDown);
+        contentPanel.add(arrivalLabel);
+        contentPanel.add(arrivalDropDown);
+        contentPanel.add(filterButton);
+        contentPanel.add(scrollPane);
+        contentPanel.add(selectFlight);
 	}
 	
-//	public void setRadioButtons() {
-//		TableColumn radioButtonColumn = flightTable.getColumnModel().getColumn(3);
-//		radioButtonColumn.setCellRenderer(new RadioButtonRenderer());
-//		radioButtonColumn.setCellEditor(new RadioButtonEditor(new JCheckBox()));
-//	}
-//	
+	public void addDepartureFilterItems(String departure) {
+		departureDropDown.addItem(departure);
+	}
+	
+	public void addArrivalFilterItems(String arrival) {
+		arrivalDropDown.addItem(arrival);
+	}
+	
 	public void addFlightInformationToView(FlightInformation flight) {
-		model.addRow(new Object[] {flight.getFlightNumber(), flight.getDepartureLocation(), flight.getArrivalLocation(), false});
+		model.addRow(new Object[] {flight.getFlightNumber(), flight.getDepartureLocation(), flight.getArrivalLocation()});
 	}
 	
-	public void addActionListenerToSortButton(ActionListener listener) {
-		sortButton.addActionListener(listener);
+	public void addActionListenerToSelectFlightButton(ActionListener listener) {
+		selectFlight.addActionListener(listener);
 	}
 	
-//	class RadioButtonRenderer extends JRadioButton implements TableCellRenderer {
-//
-//		@Override
-//		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-//				int row, int column) {
-//			setHorizontalAlignment(CENTER);
-//			setSelected(value != null && ((Boolean)value));
-//			return this;
-//		}
-//	}
-//	
-//	class RadioButtonEditor extends DefaultCellEditor implements ItemListener  {
-//
-//        private JRadioButton button;
-//
-//		public RadioButtonEditor(JCheckBox checkBox) {
-//			super(checkBox);
-//			button =  new JRadioButton();
-//			button.setHorizontalAlignment(SwingUtilities.CENTER);
-//			button.addItemListener(this);
-//		}
-//
-//		@Override
-//		public void itemStateChanged(ItemEvent e) {
-//			super.fireEditingStopped();
-//		}
-//		
-//	}
+	public void addActionListenerToFilterButton(ActionListener listener) {
+		filterButton.addActionListener(listener);
+	}
 	
+	public int getSelectedFlightNumber() {
+		int rowNumber = flightTable.getSelectedRow();
+		return (int) model.getValueAt(rowNumber, 0);
+	}
+	
+	public void clearFlightTable() {
+		model.setRowCount(0);
+		return;
+	}
+	
+	public String getSelectedDeparture() {
+		if(departureDropDown.getSelectedIndex() != -1)
+			return (String)departureDropDown.getSelectedItem();
+		return "no selection";
+	}
+	
+	public String getSelectedArrival() {
+		if(arrivalDropDown.getSelectedIndex() != -1)
+			return (String)arrivalDropDown.getSelectedItem();
+		return "no selection";
+	}
 }
