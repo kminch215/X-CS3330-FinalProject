@@ -23,6 +23,7 @@ public class SeatSelectionView extends JFrame{
 	private DefaultTableModel model;
 	private JTable seatTable;
 	private JButton selectSeat;
+	private JButton backButton;
 
 	
 	public SeatSelectionView() {
@@ -35,7 +36,7 @@ public class SeatSelectionView extends JFrame{
 		getContentPane().setLayout(null);
 		
 		//Create header for the view
-		seatSelectorLabel = new JLabel("Flight Selector");
+		seatSelectorLabel = new JLabel("Seat Selector");
 		seatSelectorLabel.setLocation(0, 0);
 		seatSelectorLabel.setSize(484, 20);
         seatSelectorLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -56,8 +57,12 @@ public class SeatSelectionView extends JFrame{
          seatTable.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
       
          selectSeat = new JButton("Select Seat");
-         selectSeat.setLocation(0, 331);
-         selectSeat.setSize(500, 30);
+         selectSeat.setLocation(0, 333);
+         selectSeat.setSize(484, 30);
+         
+         backButton = new JButton("Back");
+         backButton.setLocation(0, 20);
+         backButton.setSize(70, 30);
          
          // Add components to the frame
          JScrollPane scrollPane = new JScrollPane(seatTable);
@@ -66,6 +71,8 @@ public class SeatSelectionView extends JFrame{
          contentPanel.add(seatSelectorLabel);
          contentPanel.add(scrollPane);
          contentPanel.add(selectSeat);
+         contentPanel.add(backButton);
+
 	}
 	
 	public void addSeatInformationToView(SeatInformation seat) {
@@ -84,6 +91,7 @@ public class SeatSelectionView extends JFrame{
 		}
 	}
 	
+	// TODO: make it so that a user can select multiple seats at once
 	public int getSelectedSeatNumber() {
 		int rowNumber = seatTable.getSelectedRow();
 		return (int) model.getValueAt(rowNumber, 0);
@@ -91,6 +99,10 @@ public class SeatSelectionView extends JFrame{
 	
 	public void addActionListenerToSelectSeatButton(ActionListener listener) {
 		selectSeat.addActionListener(listener);
+	}
+	
+	public void addActionListenerToBackButton(ActionListener listener) {
+		backButton.addActionListener(listener);
 	}
 	
 	public void clearSeatTable() {

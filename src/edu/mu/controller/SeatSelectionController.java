@@ -25,11 +25,13 @@ public class SeatSelectionController {
 		displaySeats(seatModel.getSeatModel(flightNumber));
 		seatView.setVisible(true);
 		seatView.addActionListenerToSelectSeatButton(new ActionListenerSelectSeat());
+		seatView.addActionListenerToBackButton(new ActionListenerBackToFlightList());
+
 
 	}
 	
 	public void displaySeats(ArrayList<SeatInformation> seats) {
-//		seatView.clearFlightTable();
+		seatView.clearSeatTable();
 		for(SeatInformation seat : seats) {
 			seatView.addSeatInformationToView(seat);
 		}
@@ -46,6 +48,19 @@ public class SeatSelectionController {
 			PaymentController paymentController = new PaymentController();
 			System.out.println("Selected Seat(s): " + seatView.getSelectedSeatNumber());
 			System.out.println("Moving to payment view...");
+			seatView.setVisible(false);
+
+		}
+		
+	}
+	
+	public class ActionListenerBackToFlightList implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			FlightListController flightListController = new FlightListController();
+			flightListController.initiate();
+			System.out.println("Returning to Flight View...");
 			seatView.setVisible(false);
 
 		}
