@@ -19,7 +19,7 @@ public class EconomySeat extends SeatInformation{
 
 	@Override
 	void seatDescription() {
-		// TODO Auto-generated method stub
+		System.out.println("This is an Economy seat");
 		
 	}
 

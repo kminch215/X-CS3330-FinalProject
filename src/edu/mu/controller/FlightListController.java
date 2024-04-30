@@ -82,9 +82,10 @@ public class FlightListController {
 		        JOptionPane.showMessageDialog(null, "No flight selected!");
 		        return;
 			}
-			SeatSelectionController seatController = new SeatSelectionController(); //We should change this to accept a parameter of flight number
+			SeatSelectionController seatController = new SeatSelectionController(flightView.getSelectedFlightNumber()); //We should change this to accept a parameter of flight number
 			System.out.println("Moving to seat view for: " + flightView.getSelectedFlightNumber());
 			flightView.setVisible(false);
+//			seatController.initiate();
 		}
 		
 	}
